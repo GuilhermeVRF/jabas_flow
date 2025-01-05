@@ -17,8 +17,9 @@ public class Main {
 		UserService userService = new UserService(userRepository);
 		UserController userController = new UserController(userService);
 		
-		User user = userController.show(2);
-		user.setName("José");
-		userController.update(user);
+		User user = new User("Guilherme", "guilhermevr.figueiredo@outlook.com", "1234", null);
+		//userController.store(user);
+		
+		System.out.println(userController.show(1));
 	}
 }

@@ -1,11 +1,15 @@
 package repositories;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import models.User;
+import utils.PasswordUtils;
 
 public class UserRepository {
 	private Connection connection;
@@ -20,13 +24,15 @@ public class UserRepository {
 		try {
 			PreparedStatement preparedStatment = this.connection.prepareStatement(insertUserQuery);
 			
+			String password = PasswordUtils.encrypt(user.getPassword());
+			
 			preparedStatment.setString(1, user.getName());
 			preparedStatment.setString(2, user.getEmail());
-			preparedStatment.setString(3, user.getPassword());
+			preparedStatment.setString(3, password);
 			preparedStatment.setString(4, user.getProfile());
 			
 			return preparedStatment.executeUpdate() > 0;
-		}catch(SQLException exception) {
+		}catch(SQLException | NoSuchAlgorithmException | UnsupportedEncodingException exception) {
 			System.err.println(exception.getMessage());
 			return false;
 		}
