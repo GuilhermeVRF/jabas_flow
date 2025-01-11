@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import models.User;
 import utils.PasswordUtils;
+import utils.Response;
 
 public class UserRepository {
 	private Connection connection;
@@ -18,7 +19,7 @@ public class UserRepository {
 		this.connection = connection;
 	}
 	
-	public boolean store(User user) {
+	public Response store(User user) {
 		String insertUserQuery = "INSERT INTO User (name, email, password, profile, created_at, updated_at) VALUES (?, ?, ?, ?, NOW(), NOW());";
 		
 		try {
@@ -31,10 +32,11 @@ public class UserRepository {
 			preparedStatment.setString(3, password);
 			preparedStatment.setString(4, user.getProfile());
 			
-			return preparedStatment.executeUpdate() > 0;
+			if(preparedStatment.executeUpdate() > 0) return new Response("success", "Usuário cadastrasdo com sucesso!");
+				
+			return new Response("error", "Ocorreu um erro durante o cadastro!");
 		}catch(SQLException | NoSuchAlgorithmException | UnsupportedEncodingException exception) {
-			System.err.println(exception.getMessage());
-			return false;
+			return new Response("error", exception.getMessage());
 		}
 	}
 	

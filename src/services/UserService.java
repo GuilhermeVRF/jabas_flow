@@ -2,6 +2,7 @@ package services;
 
 import models.User;
 import repositories.UserRepository;
+import utils.Response;
 
 public class UserService {
 	private UserRepository userRepository;
@@ -10,7 +11,7 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 	
-	public boolean store(User user) {
+	public Response store(User user) {
 		return this.userRepository.store(user);
 	}
 	

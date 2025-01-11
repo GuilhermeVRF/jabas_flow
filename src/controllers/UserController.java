@@ -2,6 +2,7 @@ package controllers;
 
 import models.User;
 import services.UserService;
+import utils.Response;
 
 public class UserController {
 	private UserService userService;
@@ -10,7 +11,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	public boolean store(User user) {
+	public Response store(User user) {
 		return this.userService.store(user);
 	}
 	

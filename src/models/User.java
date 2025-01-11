@@ -77,8 +77,6 @@ public class User {
 				"Name: " + this.name + "\n" +
 				"E-mail: " + this.email + "\n" +
 				"Password: " + this.password + "\n" +
-				"Profile: " + this.profile + "\n" +
-				"Created at: "+ this.created_at.toString() + "\n" +
-				"Updated at: " + this.updated_at.toString();
+				"Profile: " + this.profile + "\n";
 	}
 }
