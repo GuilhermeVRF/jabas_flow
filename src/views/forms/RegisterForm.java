@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 import Router.Router;
 import models.User;
@@ -68,20 +69,26 @@ public class RegisterForm extends Form {
 
         // Painel de Senha
         JLabel passwordLabel = new Label("Senha");
-        JPasswordField passwordField = new PasswordField();
+        PasswordField passwordField = new PasswordField();
+        JToggleButton togglePassword = passwordField.getToggleButton();
         gbc.gridx = 0; gbc.gridy = 3;
         this.add(passwordLabel, gbc);
         gbc.gridx = 1;
         this.add(passwordField, gbc);
+        gbc.gridx = 2;
+        this.add(togglePassword, gbc);
 
         // Painel de Repita a Senha
         JLabel repeatPasswordLabel = new Label("Repita a Senha");
-        JPasswordField repeatPasswordField = new PasswordField();
+        PasswordField repeatPasswordField = new PasswordField();
+        JToggleButton toggleRepeatPassword = repeatPasswordField.getToggleButton();
         gbc.gridx = 0; gbc.gridy = 4;
         this.add(repeatPasswordLabel, gbc);
         gbc.gridx = 1;
         this.add(repeatPasswordField, gbc);
-
+        gbc.gridx = 2;
+        this.add(toggleRepeatPassword, gbc);
+        
         // Botão de Enviar
         JButton submitBtn = new Button("Enviar");
         gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2; // O botão ocupa duas colunas
