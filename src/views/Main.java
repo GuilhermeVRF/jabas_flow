@@ -1,25 +1,28 @@
 package views;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 
+import javax.swing.JFrame;
+
+import Router.Router;
 import controllers.UserController;
 import database.MySQLConnection;
-import models.User;
 import repositories.UserRepository;
 import services.UserService;
+import views.components.Header;
 
 public class Main {
+	public static final JFrame FRAME = new JFrame("Login");
+	public static void main(String[] args) {		
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
 
-	public static void main(String[] args) {
-		Connection connection = MySQLConnection.getConnection();
-		
-		UserRepository userRepository = new UserRepository(connection);
-		UserService userService = new UserService(userRepository);
-		UserController userController = new UserController(userService);
-		
-		User user = new User("Guilherme", "guilhermevr.figueiredo@outlook.com", "1234", null);
-		//userController.store(user);
-		
-		System.out.println(userController.show(1));
+        // Configurar o tamanho do JFrame para ocupar toda a tela
+        FRAME.setSize(screenSize.width, screenSize.height);
+        Router.displayView(new Register());
+        FRAME.setVisible(true);
 	}
 }
