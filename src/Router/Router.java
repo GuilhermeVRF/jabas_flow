@@ -5,8 +5,8 @@ import javax.swing.JPanel;
 
 import controllers.UserController;
 import database.MySQLConnection;
-import models.User;
 import repositories.UserRepository;
+import requests.UserRequest;
 import services.UserService;
 import utils.Response;
 import views.Main;
@@ -32,7 +32,7 @@ public final class Router {
 	private static final UserService USER_SERVICE = new UserService(USER_REPOSITORY);
 	private static final UserController USER_CONTROLLER = new UserController(USER_SERVICE);
 	
-	public static Response storeUser(User user) {
-		return USER_CONTROLLER.store(user);
+	public static Response storeUser(UserRequest userRequest) {
+		return USER_CONTROLLER.store(userRequest);
 	}
 }

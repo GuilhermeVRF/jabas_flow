@@ -11,12 +11,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import Router.Router;
-import models.User;
+import requests.UserRequest;
 import utils.Response;
 import views.customs.Button;
 import views.customs.Label;
@@ -103,13 +102,13 @@ public class RegisterForm extends Form {
 	            String password = passwordField.getText();
 	            String repeatPassword = repeatPasswordField.getText();
 	            
-	            User user = new User(username, email, password, repeatPassword);
-	            Response response = Router.storeUser(user);
-	            
-	            if(response.getSTATUS() == "success") {
-	            	
+	            UserRequest userRequest = new UserRequest(username, email, password, repeatPassword);
+	            Response response = Router.storeUser(userRequest);
+	            System.out.println(response.getSTATUS());
+	            if(response.getSTATUS().equals("success")) {
+	            	JOptionPane.showMessageDialog(null, response.getMESSAGE(), "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 	            }else {
-	            	JOptionPane.showMessageDialog(null, user);
+	            	JOptionPane.showMessageDialog(null, response.getMESSAGE(), "Error", JOptionPane.ERROR_MESSAGE);
 	            }
             }
         });

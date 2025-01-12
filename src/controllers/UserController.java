@@ -1,6 +1,7 @@
 package controllers;
 
 import models.User;
+import requests.UserRequest;
 import services.UserService;
 import utils.Response;
 
@@ -11,8 +12,14 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	public Response store(User user) {
-		return this.userService.store(user);
+	public Response store(UserRequest userRequest) {
+		try {
+			userRequest.validate();
+		}catch(IllegalArgumentException exception) {
+			return new Response("error", exception.getMessage());
+		}
+		
+		return this.userService.store(userRequest.toUser());
 	}
 	
 	public User show(int id) {

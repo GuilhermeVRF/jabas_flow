@@ -32,7 +32,7 @@ public class UserRepository {
 			preparedStatment.setString(3, password);
 			preparedStatment.setString(4, user.getProfile());
 			
-			if(preparedStatment.executeUpdate() > 0) return new Response("success", "Usuário cadastrasdo com sucesso!");
+			if(preparedStatment.executeUpdate() > 0) return new Response("success", "Usuário cadastrado com sucesso!");
 				
 			return new Response("error", "Ocorreu um erro durante o cadastro!");
 		}catch(SQLException | NoSuchAlgorithmException | UnsupportedEncodingException exception) {
