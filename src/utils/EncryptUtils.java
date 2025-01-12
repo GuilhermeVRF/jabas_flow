@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class PasswordUtils {
+public class EncryptUtils {
 	public static String encrypt(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest messageDigest;
 		messageDigest = MessageDigest.getInstance("SHA-256");
