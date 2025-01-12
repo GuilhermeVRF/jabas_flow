@@ -1,5 +1,6 @@
 package repositories;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -9,7 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import models.User;
-import utils.PasswordUtils;
+import utils.EncryptUtils;
+import utils.FileUtils;
 import utils.Response;
 
 public class UserRepository {
@@ -25,17 +27,18 @@ public class UserRepository {
 		try {
 			PreparedStatement preparedStatment = this.connection.prepareStatement(insertUserQuery);
 			
-			String password = PasswordUtils.encrypt(user.getPassword());
+			String password = EncryptUtils.encrypt(user.getPassword());
+			String filePath = FileUtils.save(user.getProfile(), "src/uploads/profiles/");
 			
 			preparedStatment.setString(1, user.getName());
 			preparedStatment.setString(2, user.getEmail());
 			preparedStatment.setString(3, password);
-			preparedStatment.setString(4, user.getProfile());
+			preparedStatment.setString(4, filePath);
 			
 			if(preparedStatment.executeUpdate() > 0) return new Response("success", "Usuário cadastrado com sucesso!");
 				
 			return new Response("error", "Ocorreu um erro durante o cadastro!");
-		}catch(SQLException | NoSuchAlgorithmException | UnsupportedEncodingException exception) {
+		}catch(SQLException | NoSuchAlgorithmException | IOException exception) {
 			return new Response("error", exception.getMessage());
 		}
 	}
@@ -48,8 +51,8 @@ public class UserRepository {
 			preparedStatment.setInt(1, id);
 			
 			ResultSet resultSet = preparedStatment.executeQuery();
-			
-			return resultSet.next() ? 
+			return null;
+			/*return resultSet.next() ? 
 					new User(
 							resultSet.getInt("id"),
 							resultSet.getString("name"),
@@ -60,7 +63,7 @@ public class UserRepository {
 							resultSet.getDate("updated_at")
 					)
 				:
-					null;
+					null;*/
 		}catch(SQLException exception) {
 			System.err.println(exception.getMessage());
 			return null;

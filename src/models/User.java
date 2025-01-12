@@ -1,5 +1,6 @@
 package models;
 
+import java.io.File;
 import java.sql.Date;
 
 public class User {
@@ -7,18 +8,18 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
-	private String profile;
+	private File profile;
 	private Date created_at;
 	private Date updated_at;
 	
-	public User(String name, String email, String password, String profile) {
+	public User(String name, String email, String password, File profile) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.profile = profile;
 	}
 
-	public User(int id, String name, String email, String password, String profile, Date created_at, Date updated_at) {
+	public User(int id, String name, String email, String password, File profile, Date created_at, Date updated_at) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -56,11 +57,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getProfile() {
+	public File getProfile() {
 		return this.profile;
 	}
 
-	public void setProfile(String profile) {
+	public void setProfile(File profile) {
 		this.profile = profile;
 	}
 	
@@ -77,6 +78,6 @@ public class User {
 				"Name: " + this.name + "\n" +
 				"E-mail: " + this.email + "\n" +
 				"Password: " + this.password + "\n" +
-				"Profile: " + this.profile + "\n";
+				"Profile: " + this.profile.getName() + "\n";
 	}
 }

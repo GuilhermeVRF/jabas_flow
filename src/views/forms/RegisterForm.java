@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -18,6 +19,7 @@ import Router.Router;
 import requests.UserRequest;
 import utils.Response;
 import views.customs.Button;
+import views.customs.FileInput;
 import views.customs.Label;
 import views.customs.PasswordField;
 import views.customs.RoundedBorder;
@@ -88,9 +90,16 @@ public class RegisterForm extends Form {
         gbc.gridx = 2;
         this.add(toggleRepeatPassword, gbc);
         
+        JLabel profileFileLabel = new Label("Imagem de perfil");
+        FileInput profileFileField = new FileInput("Selecionar imagem");
+        gbc.gridx = 0; gbc.gridy = 5;
+        this.add(profileFileLabel, gbc);
+        gbc.gridx = 1;
+        this.add(profileFileField, gbc);
+        
         // Botão de Enviar
         JButton submitBtn = new Button("Enviar");
-        gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2; // O botão ocupa duas colunas
+        gbc.gridx = 0; gbc.gridy = 6; gbc.gridwidth = 2; // O botão ocupa duas colunas
         gbc.anchor = GridBagConstraints.CENTER;         // Centraliza o botão
         this.add(submitBtn, gbc);
         
@@ -102,7 +111,7 @@ public class RegisterForm extends Form {
 	            String password = passwordField.getText();
 	            String repeatPassword = repeatPasswordField.getText();
 	            
-	            UserRequest userRequest = new UserRequest(username, email, password, repeatPassword);
+	            UserRequest userRequest = new UserRequest(username, email, password, repeatPassword, profileFileField.getSelectedFile());
 	            Response response = Router.storeUser(userRequest);
 	            System.out.println(response.getSTATUS());
 	            if(response.getSTATUS().equals("success")) {
