@@ -19,7 +19,7 @@ public class UserController {
 			return new Response("error", exception.getMessage());
 		}
 		
-		return this.userService.store(userRequest.toUser());
+		return this.userService.store(userRequest.toModel());
 	}
 	
 	public User show(int id) {
