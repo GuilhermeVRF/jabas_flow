@@ -55,12 +55,7 @@ public final class RegisterForm extends Form {
         this.add(profileFileField, FLEX_COLUMN);
         
         // Botão de Enviar
-        JButton submitBtn = new Button("Enviar");
-        FLEX_COLUMN.gridx = 0; FLEX_COLUMN.gridy = 6; FLEX_COLUMN.gridwidth = 2; 
-        FLEX_COLUMN.anchor = GridBagConstraints.CENTER;      
-        this.add(submitBtn, FLEX_COLUMN);
-        
-        submitBtn.addActionListener(new ActionListener() {
+        this.createSubmitButton("Enviar", 6, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 	            String username = nameField.getText();

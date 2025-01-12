@@ -19,7 +19,7 @@ public class FileInput extends JPanel{
 	
 	public FileInput(String buttonText) {
 		this.setLayout(new BorderLayout());
-		
+		this.setPreferredSize(new Dimension(300, 35));
 		this.setBackground(Color.WHITE);
 		
 		this.filePathField = new JLabel();

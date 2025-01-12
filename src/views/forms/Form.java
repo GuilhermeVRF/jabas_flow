@@ -5,12 +5,15 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
+import views.customs.Button;
 import views.customs.Label;
 import views.customs.PasswordField;
 import views.customs.RoundedBorder;
@@ -61,4 +64,17 @@ public abstract class Form extends JPanel{
 	    FLEX_COLUMN.gridx = 2;
 	    this.add(togglePassword, FLEX_COLUMN);
 	}
+	
+	protected void createSubmitButton(String buttonText, int gridy, ActionListener actionListener) {
+	    JButton submitBtn = new Button(buttonText);
+	    
+	    FLEX_COLUMN.gridx = 0;
+	    FLEX_COLUMN.gridy = gridy;
+	    FLEX_COLUMN.gridwidth = 2;
+	    FLEX_COLUMN.anchor = GridBagConstraints.CENTER;
+	    this.add(submitBtn, FLEX_COLUMN);
+	    
+	    submitBtn.addActionListener(actionListener);
+	}
+
 }
