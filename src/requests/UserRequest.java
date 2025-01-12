@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import models.User;
 
-public class UserRequest implements FormRequest {
+public class UserRequest implements FormRequest<User> {
     private String name;
     private String email;
     private String password;
@@ -35,7 +35,7 @@ public class UserRequest implements FormRequest {
         if(this.profile.length() > maxSizeFileInBytes) throw new IllegalArgumentException("O tamanho máximo da imagem de perfil deve ser 2MB!");
     }
 
-    public User toUser() {
+    public User toModel() {
         return new User(name, email, password, profile); 
     }
 }
