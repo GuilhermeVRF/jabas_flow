@@ -22,7 +22,7 @@ public abstract class BasePanel extends JPanel{
 	
 	protected void justifyContent(JPanel component, String position) {
 		Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		component.setMinimumSize(new Dimension(500, 300));
+		component.setMinimumSize(new Dimension(700, 500));
 		
 		switch(position) {
 			case "middle": 

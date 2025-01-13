@@ -33,24 +33,22 @@ public final class RegisterForm extends Form {
  
         // Painel de Nome
         JTextField nameField = new TextField();
-        this.createField("Nome", nameField, 1);
+        this.createField("src/assets/form/nome.png","Nome", nameField, 1);
 
         // Painel de E-mail
         JTextField emailField = new TextField();
-        this.createField("E-mail", emailField, 2);
+        this.createField("src/assets/form/email.png","E-mail", emailField, 2);
 
         // Painel de Senha
         PasswordField passwordField = new PasswordField();
-        this.createPasswordField("Senha", passwordField, 3);
+        this.createPasswordField("src/assets/form/senha.png", "Senha", passwordField, 3);
 
         // Painel de Repita a Senha
         PasswordField repeatPasswordField = new PasswordField();
-        this.createPasswordField("Repita a Senha", repeatPasswordField, 4);
+        this.createPasswordField("src/assets/form/senha.png", "Repita a Senha", repeatPasswordField, 4);
         
-        JLabel profileFileLabel = new Label("Imagem de perfil");
+        this.createLabel("src/assets/form/imagemPerfil.png", "Imagem de perfil", 5);
         FileInput profileFileField = new FileInput("Selecionar imagem");
-        FLEX_COLUMN.gridx = 0; FLEX_COLUMN.gridy = 5;
-        this.add(profileFileLabel, FLEX_COLUMN);
         FLEX_COLUMN.gridx = 1;
         this.add(profileFileField, FLEX_COLUMN);
         

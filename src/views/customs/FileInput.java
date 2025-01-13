@@ -27,6 +27,7 @@ public class FileInput extends JPanel{
 		this.add(filePathField, BorderLayout.CENTER);
 		
 		this.selectButton = new JButton(buttonText);
+		this.selectButton.setBackground(Color.WHITE);
 		this.add(selectButton, BorderLayout.EAST);
 		
 		this.selectButton.addActionListener(new ActionListener() {

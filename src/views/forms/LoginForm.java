@@ -9,10 +9,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Router.Router;
 import requests.LoginRequest;
+import utils.Response;
 import views.Register;
 import views.customs.Label;
 import views.customs.PasswordField;
@@ -33,10 +35,10 @@ public class LoginForm extends Form{
 		this.createTitle("Login");
 		
         JTextField emailField = new TextField();
-        this.createField("E-mail", emailField, 1);
+        this.createField("src/assets/form/email.png", "E-mail", emailField, 1);
 		
         PasswordField passwordField = new PasswordField();
-        this.createPasswordField("Senha", passwordField, 2);
+        this.createPasswordField("src/assets/form/senha.png","Senha", passwordField, 2);
         
         this.createSubmitButton("Enviar", 3, new ActionListener() {
 			
@@ -45,6 +47,14 @@ public class LoginForm extends Form{
 				String email = emailField.getText();
 				String password = new String(passwordField.getPassword());
 				LoginRequest loginRequest = new LoginRequest(email, password);
+				
+				Response response = Router.login(loginRequest);
+				
+				if(response.getSTATUS().equals("success")) {
+					JOptionPane.showMessageDialog(null, response.getMESSAGE(), "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+	            }else {
+	            	JOptionPane.showMessageDialog(null, response.getMESSAGE(), "Error", JOptionPane.ERROR_MESSAGE);
+	            }
 			}
 		});
         

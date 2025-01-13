@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,6 +30,7 @@ public abstract class Form extends JPanel{
         this.setBorder(new RoundedBorder(30));
         this.setLayout(new GridBagLayout());
         
+        
         this.FLEX_COLUMN.insets = new Insets(10, 10, 10, 10);
 	}
 	
@@ -47,18 +50,29 @@ public abstract class Form extends JPanel{
 	    FLEX_COLUMN.anchor = GridBagConstraints.WEST;
 	}
 	
-	protected void createField(String labelText, JTextField field, int gridy) {
-        Label label = new Label(labelText); 
-        FLEX_COLUMN.gridx = 0; 
-        FLEX_COLUMN.gridy = gridy; 
-        this.add(label, FLEX_COLUMN); 
-        
-        FLEX_COLUMN.gridx = 1; 
-        this.add(field, FLEX_COLUMN); 
-    }
+	protected void createLabel(String iconPath, String labelText, int gridy) {
+		ImageIcon icon = new ImageIcon(iconPath);
+
+	    Image scaledImage = icon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+	    icon = new ImageIcon(scaledImage);
+
+	    JLabel label = new Label(labelText, icon, JLabel.LEFT);
+	    
+	    FLEX_COLUMN.gridx = 0;
+	    FLEX_COLUMN.gridy = gridy;
+	    this.add(label, FLEX_COLUMN);
+	}
 	
-	protected void createPasswordField(String labelText, PasswordField passwordField, int gridy) {
-	    this.createField(labelText, passwordField, gridy);
+	protected void createField(String iconPath, String labelText, JTextField field, int gridy) {
+	   this.createLabel(iconPath, labelText, gridy);
+
+	    FLEX_COLUMN.gridx = 1;
+	    this.add(field, FLEX_COLUMN);
+	}
+
+	
+	protected void createPasswordField(String iconPath, String labelText, PasswordField passwordField, int gridy) {
+	    this.createField(iconPath, labelText, passwordField, gridy);
 
 	    JToggleButton togglePassword = passwordField.getToggleButton();
 	    FLEX_COLUMN.gridx = 2;
