@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 import views.forms.LoginForm;
 
-public class Login extends BasePanel{
+public class Login extends AuthenticationView{
 	public Login() {
 		super();
 		this.setVisible(true);
