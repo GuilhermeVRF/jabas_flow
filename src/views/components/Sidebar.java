@@ -24,13 +24,15 @@ public class Sidebar extends JPanel{
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JLabel lblDashboard = createNavLabel("Dashboard", page);
-        JLabel lblSettings = createNavLabel("Settings", page);
-        JLabel lblReports = createNavLabel("Reports", page);
+        JLabel lblSettings = createNavLabel("Gastos", page);
+        JLabel lblReports = createNavLabel("Receitas", page);
+        JLabel lblRecurrences = createNavLabel("Recorrências", page);
 
         // Adicionar labels à sidebar
         this.add(lblDashboard);
         this.add(lblSettings);
         this.add(lblReports);
+        this.add(lblRecurrences);
 	}
 	
 	private JLabel createNavLabel(String text, Page page) {

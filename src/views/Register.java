@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import views.forms.RegisterForm;
 
-public class Register extends BasePanel{
+public class Register extends AuthenticationView{
 	public Register() {
 		super();
 		// Corpo
