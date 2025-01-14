@@ -8,10 +8,10 @@ import javax.swing.JPanel;
 
 import views.components.Header;
 
-public abstract class BasePanel extends JPanel{
+public abstract class AuthenticationView extends JPanel{
 	protected final GridBagConstraints FLEX_COLUMN = new GridBagConstraints();
 	
-	public BasePanel() {
+	public AuthenticationView() {
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(100,100));
 		this.makeResponsive();
