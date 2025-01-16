@@ -13,8 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Router.Router;
+import models.User;
 import requests.LoginRequest;
 import utils.Response;
+import utils.UserSession;
+import views.Page;
 import views.Register;
 import views.customs.Label;
 import views.customs.PasswordField;
@@ -48,11 +51,12 @@ public class LoginForm extends Form{
 				String password = new String(passwordField.getPassword());
 				LoginRequest loginRequest = new LoginRequest(email, password);
 				
-				Response response = Router.login(loginRequest);
+				Response<User> response = Router.login(loginRequest);
 				
 				if(response.getSTATUS().equals("success")) {
-					JOptionPane.showMessageDialog(null, response.getMESSAGE(), "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
-	            }else {
+					UserSession.getInstance().setUser(response.getDATA());
+					Router.displayView(new Page());
+				}else {
 	            	JOptionPane.showMessageDialog(null, response.getMESSAGE(), "Error", JOptionPane.ERROR_MESSAGE);
 	            }
 			}

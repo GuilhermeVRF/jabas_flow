@@ -1,5 +1,6 @@
 package repositories;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import models.Login;
+import models.User;
 import utils.EncryptUtils;
 import utils.Response;
 
@@ -18,8 +20,8 @@ public class LoginRepository {
 		this.connection = connection;
 	}
 	
-	public Response login(Login login) {
-		String loginQuery = "SELECT id FROM User WHERE email = ? AND password = ?";
+	public Response<User> login(Login login) {
+		String loginQuery = "SELECT * FROM User WHERE email = ? AND password = ?";
 			
 		try {
 			String encryptedLoginPassword = EncryptUtils.encrypt(login.getPASSWORD());
@@ -30,13 +32,25 @@ public class LoginRepository {
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
-				return new Response("success", "Login efetuado com sucesso!");
+				String imagePath = resultSet.getString("profile");
+				File profileImage = new File(imagePath);
+				return new Response<User>("success", "Login efetuado com sucesso!", 
+						new User(
+								resultSet.getInt("id"),
+								resultSet.getString("name"),
+								resultSet.getString("email"),
+								resultSet.getString("password"),
+								profileImage,
+								resultSet.getDate("created_at"),
+								resultSet.getDate("updated_at")
+						)
+				);
 			}else {
-				return new Response("error", "Usuário ou senha incorreto(s)!");
+				return new Response<User>("error", "Usuário ou senha incorreto(s)!");
 			}
 			
 		}catch(SQLException | NoSuchAlgorithmException| UnsupportedEncodingException exception) {
-			return new Response("error", exception.getMessage());
+			return new Response<User>("error", exception.getMessage());
 		}
 	}
 }

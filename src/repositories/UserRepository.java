@@ -21,7 +21,7 @@ public class UserRepository {
 		this.connection = connection;
 	}
 	
-	public Response store(User user) {
+	public Response<User> store(User user) {
 		String insertUserQuery = "INSERT INTO User (name, email, password, profile, created_at, updated_at) VALUES (?, ?, ?, ?, NOW(), NOW());";
 		
 		try {
@@ -35,11 +35,11 @@ public class UserRepository {
 			preparedStatment.setString(3, password);
 			preparedStatment.setString(4, filePath);
 			
-			if(preparedStatment.executeUpdate() > 0) return new Response("success", "Usuário cadastrado com sucesso!");
+			if(preparedStatment.executeUpdate() > 0) return new Response<User>("success", "Usuário cadastrado com sucesso!", user);
 				
-			return new Response("error", "Ocorreu um erro durante o cadastro!");
+			return new Response<User>("error", "Ocorreu um erro durante o cadastro!");
 		}catch(SQLException | NoSuchAlgorithmException | IOException exception) {
-			return new Response("error", exception.getMessage());
+			return new Response<User>("error", exception.getMessage());
 		}
 	}
 	
