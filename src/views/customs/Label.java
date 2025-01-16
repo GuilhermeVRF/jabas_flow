@@ -6,6 +6,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Label extends JLabel{
+	public Label(String text, int style, int size) {
+		this.setText(text);
+		this.setFont(new Font("Roboto", style, size));
+	}
+	
 	public Label(String text) {
 		this.setText(text);
 		this.setFont(new Font("Roboto", Font.PLAIN, 18));
