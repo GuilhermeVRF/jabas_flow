@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import controllers.LoginController;
 import controllers.UserController;
 import database.MySQLConnection;
+import models.User;
 import repositories.LoginRepository;
 import repositories.UserRepository;
 import requests.LoginRequest;
@@ -45,7 +46,7 @@ public final class Router {
 	private static final LoginService LOGIN_SERVICE = new LoginService(LOGIN_REPOSITORY);
 	private static final LoginController LOGIN_CONTROLLER = new LoginController(LOGIN_SERVICE);
 	
-	public static Response login(LoginRequest loginRequest) {
+	public static Response<User> login(LoginRequest loginRequest) {
 		return LOGIN_CONTROLLER.login(loginRequest);
 	}
 }
