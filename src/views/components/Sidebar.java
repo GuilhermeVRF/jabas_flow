@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Router.ViewManager;
 import views.Page;
 
 public class Sidebar extends JPanel{
@@ -27,12 +28,14 @@ public class Sidebar extends JPanel{
         JLabel lblSettings = createNavLabel("Gastos", page);
         JLabel lblReports = createNavLabel("Receitas", page);
         JLabel lblRecurrences = createNavLabel("Recorrências", page);
-
+        JLabel lblCategories = createNavLabel("Categorias", page);
+        
         // Adicionar labels à sidebar
         this.add(lblDashboard);
-        this.add(lblSettings);
-        this.add(lblReports);
-        this.add(lblRecurrences);
+        //this.add(lblSettings);
+        //this.add(lblReports);
+        //this.add(lblRecurrences);
+        this.add(lblCategories);
 	}
 	
 	private JLabel createNavLabel(String text, Page page) {
@@ -50,8 +53,7 @@ public class Sidebar extends JPanel{
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	page.showPage(text);
-            	System.out.println(text);
+            	ViewManager.displayMainContent(text);
             }
 
             @Override
