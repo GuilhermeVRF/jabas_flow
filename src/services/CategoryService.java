@@ -16,4 +16,8 @@ public class CategoryService {
 	public Response<List<Category>> get(){
 		return this.categoryRepository.get();
 	}
+	
+	public Response<Category> store(Category category){
+		return this.categoryRepository.store(category);
+	}
 }
