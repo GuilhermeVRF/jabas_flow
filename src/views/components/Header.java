@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.io.File;
 
@@ -14,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import utils.UserSession;
+import views.customs.Label;
 
 public class Header extends JPanel{
 	public Header() {
@@ -37,7 +37,7 @@ public class Header extends JPanel{
 			File profileFile = new File(profileFilePath);
 			
 			if(profileFile.exists()){
-				JPanel profilePanel =  new JPanel(new GridBagLayout());
+				JPanel profilePanel =  new JPanel(new BorderLayout());
 				profilePanel.setOpaque(false);
 				ImageIcon profileIcon = new ImageIcon(profileFilePath);
 	
@@ -45,9 +45,11 @@ public class Header extends JPanel{
 	            profileIcon = new ImageIcon(scaledImage);
 	
 	            JLabel profileLabel = new JLabel(profileIcon);
-	            profilePanel.add(profileLabel);
+	            profilePanel.add(profileLabel, BorderLayout.EAST);
+	            profilePanel.add(new Label(userSession.getUser().getName()), BorderLayout.WEST);
 	            
 	            this.add(profilePanel, BorderLayout.EAST);
+	            
 			}
 		}
 		this.setVisible(true);
