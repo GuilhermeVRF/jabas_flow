@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import Router.Router;
+import Router.ViewManager;
 
 public class Main {
 	public static final JFrame FRAME = new JFrame("Login");
@@ -15,7 +15,8 @@ public class Main {
 
         // Configurar o tamanho do JFrame para ocupar toda a tela
         FRAME.setSize(screenSize.width, screenSize.height);
-        Router.displayView(new Page());
+        FRAME.setMinimumSize(new Dimension(1000, 800));
+        ViewManager.displayView(new Login());
         FRAME.setVisible(true);
 	}
 }
